@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 /* ============================================================================
    YADLAPALLI LALITH NIVAS — CYBERSECURITY & AI PORTFOLIO · DESIGN SYSTEM
@@ -127,10 +127,10 @@
   --ink-muted: #475067;
   --ink-faint: #586585;
 
-  --accent: #0a7fa3;          /* Signal Cyan — the one chrome accent */
-  --accent-strong: #086683;   /* accent text at small sizes (AAA) */
+  --accent: #059669;          /* Signal Cyan — the one chrome accent */
+  --accent-strong: #047857;   /* accent text at small sizes (AAA) */
   --accent-ink: #ffffff;      /* text on accent fill */
-  --accent-glow: rgba(10, 127, 163, 0.12);
+  --accent-glow: rgba(16, 185, 129, 0.16);
 
   --highlight: #9a4a06;       /* warm "the numbers" — stats only */
 
@@ -161,10 +161,10 @@
   --ink-muted: #9aa8c6;
   --ink-faint: #74849f;
 
-  --accent: #34d6f0;
-  --accent-strong: #34d6f0;
+  --accent: #10b981;
+  --accent-strong: #34d399;
   --accent-ink: #04121a;
-  --accent-glow: rgba(52, 214, 240, 0.20);
+  --accent-glow: rgba(16, 185, 129, 0.24);
 
   --highlight: #f0b84a;
 
