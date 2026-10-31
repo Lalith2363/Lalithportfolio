@@ -43,9 +43,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   }, [paletteOpen])
 
-  /* Idle-prefetch the palette chunk so the first ⌘K is instant. Cancel with
-     the matching API (cancelIdleCallback vs clearTimeout) so the cleanup is
-     not a silent no-op under StrictMode / unmount. */
   useEffect(() => {
     const w = window as Window & {
       requestIdleCallback?: (cb: () => void) => number
@@ -80,15 +77,24 @@ export default function App() {
 
         <div className="cv-auto"><About /></div>
 
-        {/* Work is NOT wrapped in cv-auto: its pinned reel sets a dynamic height
-            and uses sticky positioning, which fight content-visibility. */}
         <Work />
 
         <div className="cv-auto"><Stack /></div>
 
-        {/* The single marquee (device #4) — a capabilities ribbon. */}
+        {/* The single capabilities marquee */}
         <div className="border-y border-[color:var(--line)]">
-          <BigMarquee items={['Frameworks', 'LLMs', 'Component libraries', 'On-device ML', 'Full-stack apps']} speed={42} />
+          <BigMarquee
+            items={[
+              'Threat Detection',
+              'Deep Learning',
+              'Penetration Testing',
+              'Network Security',
+              'Vulnerability Analysis',
+              'Computer Vision',
+              'Kali Linux',
+            ]}
+            speed={40}
+          />
         </div>
 
         <div className="cv-auto"><Process /></div>

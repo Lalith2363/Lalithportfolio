@@ -2,137 +2,123 @@ import type { Experience, Education, Certification, Skill } from '../types'
 
 export const experience: Experience[] = [
   {
-    role: 'Senior Full-Stack / React Native Engineer',
-    company: '3STechLabs',
-    location: 'Remote, United States',
-    period: 'May 2024 – Present',
-    current: true,
+    role: 'Cyber Security Intern',
+    company: 'Slash Mark IT Solutions Pvt Ltd',
+    location: 'India',
+    period: 'Apr 2025 – Jun 2025',
+    current: false,
     bullets: [
-      'Ship production features across cross-platform React Native apps: biometric auth, real-time sync over Firebase and REST.',
-      'Led the UX pass that lifted user engagement 20% within two months of release.',
-      'Drove iOS and Android crash rates down by wiring Sentry into the standard debugging loop, so regressions were caught before users felt them.',
+      'Built the Integrated Cyber Threat Detection system combining Python, ML, Kali Linux, and Nmap to detect and classify network threats.',
+      'Wrote machine learning pipelines that improved classification accuracy over basic rule-based methods.',
+      'Got hands-on experience with penetration testing processes and security log analysis.',
     ],
   },
   {
-    role: 'Senior React Native Developer',
-    company: 'AppGlide Technologies',
+    role: 'AI / ML Intern',
+    company: 'Suven Consultants & Technology Pvt. Ltd.',
+    location: 'India',
+    period: 'Jun 2023 – Jul 2023',
+    current: false,
+    bullets: [
+      'Built chatbots and voice assistant applications using OpenAI APIs and ChatGPT integrations.',
+      'Applied deep learning for image detection tasks — worked with CNNs and basic computer vision pipelines.',
+      'Delivered working prototypes within the internship timeline.',
+    ],
+  },
+  {
+    role: 'Cyber Security Intern',
+    company: 'Palo Alto Networks',
     location: 'Remote',
-    period: 'June 2023 – April 2024',
+    period: 'Sep 2022 – Nov 2022',
+    current: false,
     bullets: [
-      'Architected and led delivery of 3 production Expo apps now serving 50,000+ active users combined.',
-      'Mentored 4 junior engineers; cut team onboarding 40% by codifying modular standards into a working playbook.',
-      'Built the Fastlane CI/CD pipelines that took manual deployment errors down by 90%.',
-      'Shipped MVPs in 6–8 weeks by working directly with product and design, not around them.',
-      'Cut cold-start time 35% through lazy loading, image-pipeline tuning, and a navigation refactor.',
+      'Studied real-world attack techniques — reconnaissance, exploitation, and post-exploitation — and how they map to standard security frameworks.',
+      'Worked through threat detection and risk assessment scenarios, building a foundation in how enterprise security teams operate.',
+      'Completed training on security protocols and incident response workflows.',
     ],
   },
   {
-    role: 'React Native Developer',
-    company: 'TechNova Solutions Inc.',
-    location: 'Remote, United States',
-    period: 'February 2022 – April 2023',
-    bullets: [
-      'Rewrote the data-fetching layer with async Firebase caching, which lifted overall app performance 25%.',
-      'Released multiple consumer apps to the App Store and Google Play with zero post-launch crashes.',
-      'Pulled my weight in Agile ceremonies and shipped features ahead of sprint commitments.',
-    ],
-  },
-  {
-    role: 'UI/UX & Graphic Designer (Part-Time)',
-    company: 'W3 Technologies',
+    role: 'Web Development Intern',
+    company: 'Internshala',
     location: 'Remote',
-    period: 'October 2021 – March 2023',
+    period: 'Jul 2022 – Oct 2022',
+    current: false,
     bullets: [
-      'Turned product requirements into responsive Figma and Adobe XD mockups for mobile-first surfaces.',
-      'Held visual consistency across the mobile component library in lockstep with the engineering team.',
+      'Built web applications using HTML, CSS, and PHP with an emphasis on responsive design.',
+      'Worked on front-end UI components and learned version control and development practices.',
     ],
   },
 ]
 
 export const education: Education[] = [
   {
-    degree: 'BSc Software Engineering',
-    institution: 'Riphah International University',
-    period: '2016 – 2021',
+    degree: 'M. Tech in Cyber Security',
+    institution: 'Jawaharlal Nehru Technological University Kakinada (JNTUK)',
+    period: '2024 – Present',
+    note: 'Coursework covers network security, ethical hacking, cryptography, Digital Forensics and Cyber Crime.',
+  },
+  {
+    degree: 'B. Tech in Computer Science and Engineering',
+    institution: 'Sir C R Reddy College of Engineering',
+    period: '2020 – 2024',
+    note: 'Core subjects: data structures, algorithms, operating systems, computer networks, DBMS.',
   },
 ]
 
 export const certifications: Certification[] = [
   {
-    name: 'Mobile App Development (React Native)',
-    issuer: 'Azad Chaiwala Institute',
-    year: '2023 – 2024',
+    name: 'Cybersecurity Virtual Internship',
+    issuer: 'Palo Alto Networks',
+    year: '2022',
   },
   {
-    name: 'Software Engineering Fundamentals',
-    issuer: 'Riphah International University',
-    year: '2021',
+    name: 'AI & Machine Learning Internship',
+    issuer: 'Suven Consultants & Technology',
+    year: '2023',
   },
 ]
 
-/* Skills — grouped to mirror the <Stack /> bento. Verified against the actual
- * stack used across the shipped open-source projects. `level` is unused in the
- * UI; kept for type back-compat. */
 export const skills: Skill[] = [
-  // Core engineering — every commit touches these.
-  { name: 'TypeScript (strict)', category: 'Core' },
-  { name: 'JavaScript (ES2024)', category: 'Core' },
-  { name: 'React 19', category: 'Core' },
-  { name: 'Node.js', category: 'Core' },
+  // Core programming languages
   { name: 'Python', category: 'Core' },
+  { name: 'Java', category: 'Core' },
+  { name: 'JavaScript', category: 'Core' },
+  { name: 'Bash / Shell', category: 'Core' },
+  { name: 'SQL', category: 'Core' },
 
-  // Web — Next.js + React + the kinetic layer.
-  { name: 'Next.js 16', category: 'Web' },
-  { name: 'React (Vite)', category: 'Web' },
-  { name: 'Tailwind v4', category: 'Web' },
-  { name: 'App Router / RSC', category: 'Web' },
-  { name: 'Framer Motion', category: 'Web' },
-  { name: 'Three.js / R3F', category: 'Web' },
+  // Security tools & skills
+  { name: 'Kali Linux', category: 'Security' },
+  { name: 'Nmap', category: 'Security' },
+  { name: 'Wireshark', category: 'Security' },
+  { name: 'Metasploit', category: 'Security' },
+  { name: 'Burp Suite', category: 'Security' },
+  { name: 'Threat Detection', category: 'Security' },
+  { name: 'Vulnerability Analysis', category: 'Security' },
+  { name: 'Incident Response', category: 'Security' },
+  { name: 'Digital Forensics', category: 'Security' },
 
-  // Mobile — native bridges, animation, distribution.
-  { name: 'React Native', category: 'Mobile' },
-  { name: 'Expo SDK 56', category: 'Mobile' },
-  { name: 'Reanimated 4', category: 'Mobile' },
-  { name: 'Expo Router', category: 'Mobile' },
-  { name: 'New Architecture', category: 'Mobile' },
-  { name: 'FlashList v2', category: 'Mobile' },
-  { name: 'Unistyles v3', category: 'Mobile' },
-  { name: 'TFLite (on-device AI)', category: 'Mobile' },
+  // Machine Learning & AI
+  { name: 'TensorFlow', category: 'AI' },
+  { name: 'Scikit-learn', category: 'AI' },
+  { name: 'OpenCV', category: 'AI' },
+  { name: 'CNN (Convolutional Neural Networks)', category: 'AI' },
+  { name: 'LSTM & Sequential Models', category: 'AI' },
+  { name: 'SVM & Random Forest', category: 'AI' },
+  { name: 'Transfer Learning (ResNet, VGG16, VGG19)', category: 'AI' },
+  { name: 'OpenAI API & ChatGPT Integration', category: 'AI' },
 
-  // Backend & data — realtime, persistence, REST + RPC.
-  { name: 'Express', category: 'Backend' },
-  { name: 'Supabase + PostGIS', category: 'Backend' },
-  { name: 'MongoDB Atlas', category: 'Backend' },
-  { name: 'PostgreSQL', category: 'Backend' },
-  { name: 'Prisma + SQLite', category: 'Backend' },
-  { name: 'Firebase', category: 'Backend' },
-  { name: 'TanStack Query', category: 'Backend' },
-  { name: 'Zustand', category: 'Backend' },
+  // Networking & Systems
+  { name: 'TCP/IP & OSI Model', category: 'Networking' },
+  { name: 'DNS & DHCP', category: 'Networking' },
+  { name: 'Subnetting, Routing & Switching', category: 'Networking' },
+  { name: 'Kali Linux & Parrot OS', category: 'Networking' },
+  { name: 'Ubuntu Linux', category: 'Networking' },
+  { name: 'Windows Security', category: 'Networking' },
 
-  // AI / ML — from training loops to inference.
-  { name: 'Transformers (MoE/MLA)', category: 'AI' },
-  { name: 'RAG (LanceDB)', category: 'AI' },
-  { name: 'PyTorch', category: 'AI' },
-  { name: 'transformers.js', category: 'AI' },
-  { name: 'RLHF (GRPO / DPO)', category: 'AI' },
-  { name: 'Groq / Ollama', category: 'AI' },
-  { name: 'Custom Claude agents', category: 'AI' },
-  { name: 'Prompt engineering', category: 'AI' },
-
-  // Systems & tooling — the deep end.
-  { name: 'Compilers', category: 'Systems' },
-  { name: 'Signals reactivity', category: 'Systems' },
-  { name: 'CRDTs', category: 'Systems' },
-  { name: 'Signed OTA', category: 'Systems' },
-  { name: 'Monorepos', category: 'Systems' },
-  { name: 'GitHub Actions', category: 'Systems' },
-  { name: 'EAS Build', category: 'Systems' },
-  { name: 'Vercel', category: 'Systems' },
-
-  // Design & craft.
-  { name: 'Figma', category: 'Design' },
-  { name: 'Pixel-perfect UI', category: 'Design' },
-  { name: 'Motion design', category: 'Design' },
-  { name: 'Accessibility (AA+)', category: 'Design' },
-  { name: 'Brand systems', category: 'Design' },
+  // Web & App Development
+  { name: 'React', category: 'Web' },
+  { name: 'React Native', category: 'Web' },
+  { name: 'HTML5 & CSS3', category: 'Web' },
+  { name: 'Bootstrap', category: 'Web' },
+  { name: 'PHP', category: 'Web' },
 ]

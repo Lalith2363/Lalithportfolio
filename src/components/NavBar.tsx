@@ -12,16 +12,14 @@ interface NavbarProps {
 }
 
 const links = [
-  { id: 'about',      label: 'About' },
-  { id: 'work',       label: 'Work' },
-  { id: 'stack',      label: 'Stack' },
-  { id: 'process',    label: 'Process' },
+  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Projects' },
+  { id: 'stack', label: 'Stack' },
+  { id: 'process', label: 'Methodology' },
   { id: 'experience', label: 'Experience' },
-  { id: 'contact',    label: 'Contact' },
+  { id: 'contact', label: 'Contact' },
 ] as const
 
-/* Floating glass pill nav (§7). Active-section indicator via Framer layoutId.
- * Restraint zone: hover = underline only, no decorative motion. */
 export default function Navbar({ theme, onToggleTheme, onOpenPalette }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('')
@@ -49,44 +47,36 @@ export default function Navbar({ theme, onToggleTheme, onOpenPalette }: NavbarPr
       <motion.nav
         initial={{ y: -32, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed inset-x-0 top-4 z-40 flex justify-center px-3 sm:top-6"
-        aria-label="Primary"
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        aria-label="Main navigation"
+        className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[min(94%,1040px)]"
       >
-        <div className="glass flex w-full max-w-[1100px] items-center justify-between gap-2 rounded-[var(--r-pill)] py-2 pl-4 pr-2 shadow-[var(--shadow-sm)]">
-          {/* Logo */}
+        <div className="flex items-center justify-between rounded-full border border-[color:var(--line)] bg-[color:var(--bg-elev)]/85 px-4 py-2 backdrop-blur-md shadow-sm sm:px-6">
           <button
             type="button"
-            data-cursor="target"
             onClick={scrollToTop}
-            className="flex flex-shrink-0 items-center gap-2 font-display text-[1.02rem] font-bold tracking-[-0.02em] text-[color:var(--ink)]"
-            aria-label="Aashir Athar — back to top"
+            className="font-display font-semibold text-[color:var(--ink)] tracking-tight hover:text-[color:var(--accent)] transition-colors"
           >
-            <img src="/favicon.svg" alt="" aria-hidden="true" width={26} height={26} loading="eager" decoding="async" className="h-[26px] w-[26px]" />
-            <span>Aashir</span>
-            <span aria-hidden="true" className="text-[color:var(--accent-strong)]">.</span>
+            Lalith Nivas<span className="text-[color:var(--accent-strong)]">.</span>
           </button>
 
-          {/* Desktop links */}
           {!isMobile && (
-            <ul className="flex items-center gap-0.5">
-              {links.map(l => {
-                const isActive = active === l.id
+            <ul className="flex items-center gap-1">
+              {links.map(link => {
+                const isActive = active === link.id
                 return (
-                  <li key={l.id}>
+                  <li key={link.id}>
                     <button
                       type="button"
-                      aria-current={isActive ? 'page' : undefined}
-                      data-cursor="target"
-                      onClick={() => go(l.id)}
-                      className={`relative rounded-[var(--r-sm)] px-3 py-1.5 text-small font-medium transition-colors duration-200 ${
-                        isActive ? 'text-[color:var(--accent-strong)]' : 'text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]'
+                      onClick={() => go(link.id)}
+                      className={`relative px-3 py-1.5 font-display text-[0.85rem] transition-colors ${
+                        isActive ? 'text-[color:var(--ink)] font-semibold' : 'text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]'
                       }`}
                     >
-                      {l.label}
+                      {link.label}
                       {isActive && (
                         <motion.span
-                          layoutId="nav-dot"
+                          layoutId="nav-pill"
                           aria-hidden="true"
                           className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[color:var(--accent)]"
                           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -99,109 +89,83 @@ export default function Navbar({ theme, onToggleTheme, onOpenPalette }: NavbarPr
             </ul>
           )}
 
-          {/* Controls */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             {!isMobile && (
               <button
                 type="button"
                 onClick={onOpenPalette}
-                data-cursor="target"
                 aria-label="Open command palette"
                 title="Search (press ⌘K)"
-                className="hidden h-9 items-center gap-2 rounded-[var(--r-sm)] border border-[color:var(--line)] bg-[color:var(--surface)] pl-2.5 pr-1.5 text-[color:var(--ink-muted)] transition-colors duration-200 hover:border-[color:var(--line-strong)] hover:text-[color:var(--ink)] sm:inline-flex"
+                className="hidden h-9 items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--surface)] px-3 text-[color:var(--ink-muted)] hover:border-[color:var(--line-strong)] hover:text-[color:var(--ink)] sm:inline-flex"
               >
-                <Search size={14} strokeWidth={1.5} aria-hidden="true" />
-                <kbd className="text-[0.62rem]">{isMac ? '⌘' : 'Ctrl '}K</kbd>
+                <Search size={13} strokeWidth={1.5} aria-hidden="true" />
+                <kbd className="text-[0.62rem] font-mono">{isMac ? '⌘' : 'Ctrl '}K</kbd>
               </button>
             )}
 
             <button
               type="button"
               onClick={e => onToggleTheme(e)}
-              data-cursor="target"
-              className="grid h-9 w-9 place-items-center rounded-[var(--r-sm)] border border-[color:var(--line)] bg-[color:var(--surface)] text-[color:var(--ink-muted)] transition-colors duration-200 hover:text-[color:var(--ink)]"
+              className="grid h-9 w-9 place-items-center rounded-full border border-[color:var(--line)] bg-[color:var(--surface)] text-[color:var(--ink-muted)] hover:text-[color:var(--ink)] transition-colors"
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
             >
-              {theme === 'dark' ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
+              {theme === 'dark' ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
             </button>
 
             {!isMobile && (
               <a
-                href="mailto:aashirathar@gmail.com"
-                data-cursor="target"
-                className="inline-flex h-9 items-center gap-1.5 rounded-[var(--r-sm)] bg-[color:var(--ink)] px-3.5 font-display text-[0.8rem] font-semibold text-[color:var(--bg)] transition-[transform,background,color] duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--accent)] hover:text-[color:var(--accent-ink)] active:scale-95"
-                aria-label="Hire Aashir — open email"
+                href="mailto:lalithnivasy@gmail.com"
+                className="inline-flex h-9 items-center gap-1 rounded-full bg-[color:var(--ink)] px-4 font-display text-[0.8rem] font-semibold text-[color:var(--bg)] transition-all hover:bg-[color:var(--accent)] hover:text-white"
               >
-                Hire me
-                <span aria-hidden="true">→</span>
+                Get in touch &rarr;
               </a>
             )}
 
             {isMobile && (
-              <>
-                <button
-                  type="button"
-                  onClick={onOpenPalette}
-                  data-cursor="target"
-                  className="grid h-9 w-9 place-items-center rounded-[var(--r-sm)] border border-[color:var(--line)] bg-[color:var(--surface)] text-[color:var(--ink-muted)]"
-                  aria-label="Open command palette"
-                >
-                  <Search size={16} strokeWidth={1.5} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMenuOpen(o => !o)}
-                  data-cursor="target"
-                  className="grid h-9 w-9 place-items-center rounded-[var(--r-sm)] border border-[color:var(--line)] bg-[color:var(--surface)] text-[color:var(--ink-muted)]"
-                  aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                  aria-expanded={menuOpen}
-                  aria-controls="mobile-menu"
-                >
-                  {menuOpen ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
-                </button>
-              </>
+              <button
+                type="button"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                className="grid h-9 w-9 place-items-center rounded-full border border-[color:var(--line)] text-[color:var(--ink)]"
+              >
+                {menuOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
             )}
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile fullscreen overlay */}
+      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             ref={menuRef}
-            id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-[39] flex flex-col items-center justify-center gap-1 bg-[color:var(--bg)]/95 backdrop-blur-2xl"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site navigation"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-elev)] p-6 shadow-xl backdrop-blur-xl sm:hidden"
           >
-            {links.map((l, i) => (
-              <span key={l.id} className="overflow-hidden">
-                <motion.button
-                  type="button"
-                  onClick={() => go(l.id)}
-                  initial={{ y: '110%' }}
-                  animate={{ y: 0 }}
-                  exit={{ y: '110%' }}
-                  transition={{ delay: i * 0.05, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                  className="block px-6 py-2 font-display text-h2 font-bold tracking-[-0.02em] text-[color:var(--ink-muted)] hover:text-[color:var(--accent-strong)]"
+            <ul className="flex flex-col gap-3">
+              {links.map(link => (
+                <li key={link.id}>
+                  <button
+                    type="button"
+                    onClick={() => go(link.id)}
+                    className="w-full text-left font-display text-lg text-[color:var(--ink)] py-2"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+              <li className="pt-2 border-t border-[color:var(--line)]">
+                <a
+                  href="mailto:lalithnivasy@gmail.com"
+                  className="block text-center rounded-full bg-[color:var(--ink)] py-2.5 font-display text-sm font-semibold text-[color:var(--bg)]"
                 >
-                  {l.label}
-                </motion.button>
-              </span>
-            ))}
-            <a
-              href="mailto:aashirathar@gmail.com"
-              className="mt-8 inline-flex items-center gap-2 rounded-[var(--r-pill)] bg-[color:var(--ink)] px-9 py-3.5 font-display font-semibold text-[color:var(--bg)]"
-            >
-              Hire me <span aria-hidden="true">→</span>
-            </a>
+                  Get in touch
+                </a>
+              </li>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>

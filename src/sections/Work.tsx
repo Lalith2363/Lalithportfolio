@@ -313,7 +313,7 @@ function PinnedReel({ onOpen }: { onOpen: (p: Project) => void }) {
   /* Function-form transform reads the measured distance ref at evaluation
    * time, so the x range stays correct after layout / resize without re-wiring
    * the motion value. */
-  const x = useTransform(scrollYProgress, p => -(p * scrollDistanceRef.current))
+  const x = useTransform(scrollYProgress, (p: number) => -(p * scrollDistanceRef.current))
 
   useEffect(() => {
     const track = trackRef.current
@@ -412,7 +412,7 @@ function AlsoShipped({ onOpen }: { onOpen: (p: Project) => void }) {
 
         <Reveal delay={0.1}>
           <a
-            href="https://github.com/aashir-athar"
+            href="https://github.com/Lalith2363"
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="target"

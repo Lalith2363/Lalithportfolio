@@ -1,7 +1,7 @@
 {
-  "name": "Aashir Athar — Senior Full-Stack Product Engineer",
-  "short_name": "Aashir Athar",
-  "description": "Senior full-stack product engineer. I build the whole stack: a from-scratch cross-platform framework, a self-training LLM in TypeScript, a published component library, on-device ML, and full-stack apps. 12 solo, open-source projects on GitHub.",
+  "name": "Yadlapalli Lalith Nivas — Cybersecurity Engineer & AI Researcher",
+  "short_name": "Lalith Nivas",
+  "description": "M.Tech Cybersecurity student & engineer with hands-on experience in threat detection, vulnerability analysis, Kali Linux, Nmap, and AI/ML defense tools.",
   "start_url": "/",
   "scope": "/",
   "id": "/",
@@ -9,47 +9,29 @@
   "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait-primary",
   "background_color": "#f7f8fb",
-  "theme_color": "#0a7fa3",
+  "theme_color": "#06b6d4",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["productivity", "business", "developer", "portfolio"],
+  "categories": ["security", "developer", "portfolio"],
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" },
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "monochrome" }
   ],
-  "screenshots": [
-    {
-      "src": "/og-preview.svg",
-      "sizes": "1200x630",
-      "type": "image/svg+xml",
-      "form_factor": "wide",
-      "label": "Aashir Athar — Senior Full-Stack Product Engineer portfolio cover"
-    }
-  ],
   "shortcuts": [
     {
-      "name": "Selected work",
-      "short_name": "Work",
-      "description": "Eight flagship open-source projects, every claim grounded in a public repo.",
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "Cybersecurity and AI systems.",
       "url": "/#work",
       "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
     },
     {
-      "name": "Hire Aashir",
-      "short_name": "Hire",
-      "description": "Open an email draft. Replies within 24 hours.",
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch via email or phone.",
       "url": "/#contact",
       "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
-    },
-    {
-      "name": "Resume (PDF)",
-      "short_name": "Resume",
-      "description": "Senior full-stack product engineer resume.",
-      "url": "/resume.pdf",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
     }
-  ],
-  "related_applications": [],
-  "prefer_related_applications": false
+  ]
 }

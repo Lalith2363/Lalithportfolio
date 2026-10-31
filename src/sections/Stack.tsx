@@ -2,28 +2,12 @@ import { skills } from '../data/resume'
 import { Container, Section, SectionHeader } from '../components/ui'
 import { Reveal } from '../components/Kinetic'
 
-/* -------------------------------------------------------------------------- *
- *  STACK — the real tooling behind the work, grouped by architectural layer.  *
- *                                                                             *
- *  Reads as systems thinking, not a tag cloud: each layer is a ROW divided by *
- *  a hairline `--line` rule with generous negative space (NO card box). On    *
- *  large screens the display sub-head sits in a fixed left rail and the mono  *
- *  chips flow on the right; on mobile it stacks. Chips carry the single       *
- *  chrome accent on hover/focus (the .chip default — no per-group hues).      *
- *                                                                             *
- *  Source data groups by `category`; we relabel + order the layers top-down   *
- *  from the deepest engineering layer out to design craft.                    *
- * -------------------------------------------------------------------------- */
-
-/* Layer order, top of the stack to the surface, with editorial relabels. */
 const layers: { category: string; label: string }[] = [
-  { category: 'Core', label: 'Core engineering' },
-  { category: 'Systems', label: 'Systems & tooling' },
-  { category: 'AI', label: 'AI / ML' },
-  { category: 'Mobile', label: 'Mobile' },
-  { category: 'Backend', label: 'Backend & infra' },
-  { category: 'Web', label: 'Web' },
-  { category: 'Design', label: 'Design & craft' },
+  { category: 'Security', label: 'Security & Penetration Testing' },
+  { category: 'AI', label: 'Machine Learning & Deep Learning' },
+  { category: 'Networking', label: 'Networking & Systems' },
+  { category: 'Core', label: 'Core Languages' },
+  { category: 'Web', label: 'Web & Development' },
 ]
 
 export default function Stack() {
@@ -33,8 +17,8 @@ export default function Stack() {
         <SectionHeader
           index="02"
           label="STACK"
-          title={['Everything I ', <span key="ship" className="serif-italic">ship with.</span>]}
-          lede="The actual tools behind the projects above, grouped by where they live in the stack. Not a tag cloud."
+          title={['Tools & ', <span key="tech" className="serif-italic">technologies.</span>]}
+          lede="Hands-on security tools, machine learning frameworks, and core engineering languages applied across research and industry work."
           id="stack-heading"
         />
 
@@ -48,25 +32,26 @@ export default function Stack() {
                 key={layer.category}
                 as="div"
                 delay={i * 0.06}
-                className="grid gap-x-10 gap-y-5 border-t border-[color:var(--line)] py-8 sm:py-10 lg:grid-cols-[200px_1fr] lg:gap-x-14"
+                className="group border-t border-[color:var(--line)] py-8 first:border-t-0 sm:py-10"
               >
-                {/* Left rail — the layer name + a mono count for systems legibility. */}
-                <div className="lg:pt-1">
-                  <h3 className="text-h3 font-display text-[color:var(--ink)]">{layer.label}</h3>
-                  <span className="mt-1.5 block font-mono text-eyebrow uppercase tracking-[0.16em] text-[color:var(--ink-faint)]">
-                    {String(items.length).padStart(2, '0')} tools
-                  </span>
-                </div>
+                <div className="grid gap-6 md:grid-cols-[260px_1fr] md:gap-12 lg:grid-cols-[300px_1fr]">
+                  <div>
+                    <h3 className="font-display text-h3 font-semibold text-[color:var(--ink)]">
+                      {layer.label}
+                    </h3>
+                  </div>
 
-                {/* Right — the flowing chip set. */}
-                <ul className="flex flex-wrap gap-2.5">
-                  {items.map(skill => (
-                    /* Static labels, not controls — no tabindex / cursor target. */
-                    <li key={skill.name} className="chip inline-flex items-center px-3 py-1.5">
-                      {skill.name}
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="flex flex-wrap gap-2.5 sm:gap-3">
+                    {items.map(item => (
+                      <li
+                        key={item.name}
+                        className="chip rounded-full border border-[color:var(--line)] bg-[color:var(--bg-elev)] px-4 py-2 font-mono text-[0.82rem] text-[color:var(--ink-muted)] transition-all duration-200 hover:border-[color:var(--accent)] hover:text-[color:var(--ink)] hover:shadow-sm"
+                      >
+                        {item.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Reveal>
             )
           })}

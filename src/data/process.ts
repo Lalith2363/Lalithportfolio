@@ -6,46 +6,46 @@ export interface ProcessStep {
   artifacts: string[]
 }
 
-/* How a product gets from an idea to something people actually use. */
+/* How a security vulnerability or threat model is identified, analyzed, and mitigated. */
 export const processSteps: ProcessStep[] = [
   {
-    id: 'frame',
+    id: 'recon',
     index: '01',
-    title: 'Frame',
+    title: 'Recon & Discover',
     body:
-      'Before code, the question. I find the real problem (the one users feel, not the one the brief describes) and surface the hard constraints early so they shape the architecture instead of the bug list.',
-    artifacts: ['Problem statement', 'Constraint map', 'Success metrics'],
+      'Map the target surface and gather network intelligence using active tools like Nmap and passive OSINT methods. Identifying open ports, protocol deviations, and exposed perimeter boundaries before adversaries do.',
+    artifacts: ['Attack surface map', 'Port scan telemetry', 'Exposure inventory'],
   },
   {
-    id: 'architect',
+    id: 'analyze',
     index: '02',
-    title: 'Architect',
+    title: 'Model & Analyze',
     body:
-      'A typed, modular foundation with predictable state and clear seams: the kind of structure a framework, an LLM, and a mobile app can all share. Decisions get written down so the system survives past month six.',
-    artifacts: ['Module map', 'Typed boundaries', 'Performance budget'],
+      'Inspect traffic flows with Wireshark and examine system logs. Extract statistical features from packet headers and payload anomalies to feed into custom machine learning anomaly detectors.',
+    artifacts: ['Feature extraction', 'Protocol anomaly baseline', 'Threat matrix'],
   },
   {
-    id: 'build',
+    id: 'detect',
     index: '03',
-    title: 'Build',
+    title: 'Train & Detect',
     body:
-      'Vertical slices over horizontal layers. The first PR is something you can touch (a feed, a chat, a training loop), not a folder of utils. Ship daily, review continuously, refactor on the third pass.',
-    artifacts: ['Vertical-slice MVP', 'Design system', 'Test harness'],
+      'Train, fine-tune, and benchmark machine learning models (CNN, LSTM, SVM, Random Forest) against diverse threat datasets to catch evasive malware and zero-day deviations that rule-based systems overlook.',
+    artifacts: ['Trained ML weights', 'Confusion matrix', 'ROC-AUC benchmark'],
   },
   {
-    id: 'ship',
+    id: 'remediate',
     index: '04',
-    title: 'Ship',
+    title: 'Harden & Mitigate',
     body:
-      'CI that enforces the budget, env-aware builds, signed releases, OTA where it fits. Deployments that used to take a day take ten minutes, and stop failing the way they used to.',
-    artifacts: ['CI/CD pipeline', 'Crash + perf telemetry', 'Release playbook'],
+      'Synthesize security findings into prioritized defensive configurations, automated alert rules, firewall filters, and patch guidance to eliminate the attack vector cleanly.',
+    artifacts: ['Mitigation playbook', 'Firewall rules', 'Hardening report'],
   },
   {
-    id: 'measure',
+    id: 'verify',
     index: '05',
-    title: 'Measure',
+    title: 'Audit & Validate',
     body:
-      'Cold-start, frame drops, crash-free sessions, retention, eval scores. Numbers I can defend in a roadmap meeting, and if something regresses, the dashboard tells us before users do.',
-    artifacts: ['Perf budgets', 'Crash-free %', 'Eval gates'],
+      'Perform continuous verification through repeated scans, automated regression scripts, and simulated exploit attempts to ensure defenses remain resilient over time.',
+    artifacts: ['Pen-test validation', 'Post-patch scan', 'Compliance sign-off'],
   },
 ]

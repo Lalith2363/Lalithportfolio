@@ -1,28 +1,18 @@
 import { useRef, useState, type FormEvent } from 'react'
-import { Mail, MapPin, Copy, Check, Send } from 'lucide-react'
-import { GithubIcon, LinkedinIcon, XIcon, WhatsappIcon } from '../components/SocialIcons'
+import { Mail, Phone, Copy, Check, Send } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '../components/SocialIcons'
 import { Container, Section, SectionHeader } from '../components/ui'
 import { Reveal } from '../components/Kinetic'
 import LocalTime from '../components/LocalTime'
 
-/* -------------------------------------------------------------------------- *
- *  CONTACT (05) - the close.                                                  *
- *                                                                            *
- *  Two-column card on md+ (left = status + channels, right = a no-backend    *
- *  form), single column on mobile. RESTRAINT ZONE: <Reveal> entry only, no   *
- *  decorative motion. The form has no server: "Open email draft" composes a  *
- *  mailto and hands off to the user's client, so the page stays static and   *
- *  trackless. Chrome accent is `--accent` only. All copy free of em dashes.  *
- * -------------------------------------------------------------------------- */
-
-const EMAIL = 'aashirathar@gmail.com'
+const EMAIL = 'lalithnivasy@gmail.com'
+const PHONE = '+91 9390361183'
 
 const channels = [
-  { icon: <GithubIcon size={16} />,   label: 'GitHub',            handle: 'aashir-athar',      href: 'https://github.com/aashir-athar',     external: true },
-  { icon: <LinkedinIcon size={16} />, label: 'LinkedIn',          handle: 'aashirathar',       href: 'https://linkedin.com/in/aashirathar', external: true },
-  { icon: <XIcon size={14} />,        label: 'X',                 handle: '@aashirathar',      href: 'https://x.com/aashirathar',           external: true },
-  { icon: <Mail size={16} strokeWidth={1.5} />,    label: 'Email',    handle: EMAIL,            href: `mailto:${EMAIL}`,                     external: false },
-  { icon: <WhatsappIcon size={16} />, label: 'Mobile / WhatsApp', handle: '+92 307 477 8889',  href: 'https://wa.me/923074778889',          external: true },
+  { icon: <Mail size={16} strokeWidth={1.5} />, label: 'Email', handle: EMAIL, href: `mailto:${EMAIL}`, external: false },
+  { icon: <LinkedinIcon size={16} />, label: 'LinkedIn', handle: 'lalith-nivas-yadlapalli', href: 'https://linkedin.com/in/lalith-nivas-yadlapalli-77531921a', external: true },
+  { icon: <GithubIcon size={16} />, label: 'GitHub', handle: 'Lalith2363', href: 'https://github.com/Lalith2363', external: true },
+  { icon: <Phone size={16} strokeWidth={1.5} />, label: 'Phone', handle: PHONE, href: 'tel:+919390361183', external: true },
 ] as const
 
 const fieldClass =
@@ -33,7 +23,6 @@ const labelClass = 'font-mono text-eyebrow uppercase tracking-[0.16em] text-[col
 type FieldName = 'name' | 'email' | 'message'
 type FieldErrors = Partial<Record<FieldName, string>>
 
-/* Basic, intentionally forgiving email shape: something@something.something. */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function Contact() {
@@ -58,10 +47,13 @@ export default function Contact() {
 
   const validate = (data: typeof formData): FieldErrors => {
     const next: FieldErrors = {}
-    if (!data.name.trim()) next.name = 'Please enter your name.'
-    if (!data.email.trim()) next.email = 'Please enter your email.'
-    else if (!EMAIL_RE.test(data.email.trim())) next.email = 'Please enter a valid email address.'
-    if (!data.message.trim()) next.message = 'Please enter a message.'
+    if (!data.name.trim()) next.name = 'Please provide your name.'
+    if (!data.email.trim()) {
+      next.email = 'Please provide an email address.'
+    } else if (!EMAIL_RE.test(data.email.trim())) {
+      next.email = 'Please enter a valid email address.'
+    }
+    if (!data.message.trim()) next.message = 'Please include a short message.'
     return next
   }
 
@@ -70,18 +62,24 @@ export default function Contact() {
     const nextErrors = validate(formData)
     setErrors(nextErrors)
 
-    if (Object.keys(nextErrors).length > 0) {
-      setOpened(false)
-      /* Move focus to the first invalid field, in DOM order. */
-      if (nextErrors.name) nameRef.current?.focus()
-      else if (nextErrors.email) emailRef.current?.focus()
-      else if (nextErrors.message) messageRef.current?.focus()
+    if (nextErrors.name) {
+      nameRef.current?.focus()
+      return
+    }
+    if (nextErrors.email) {
+      emailRef.current?.focus()
+      return
+    }
+    if (nextErrors.message) {
+      messageRef.current?.focus()
       return
     }
 
-    const subject = `Project inquiry from ${formData.name || 'your portfolio'}`
-    const body = `${formData.message}\n\nFrom: ${formData.name}\nReply to: ${formData.email}`
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    const subject = encodeURIComponent(`Portfolio contact from ${formData.name.trim()}`)
+    const body = encodeURIComponent(
+      `From: ${formData.name.trim()} <${formData.email.trim()}>\n\nMessage:\n${formData.message.trim()}`,
+    )
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
     setOpened(true)
   }
 
@@ -92,181 +90,154 @@ export default function Contact() {
           index="05"
           label="CONTACT"
           id="contact-heading"
-          title={['Got something hard to ', <span className="serif-italic">build?</span>]}
-          lede="A full-time role, a freelance build, or a second opinion on an architecture you are stuck on. Send it over. I read every message myself and reply within a day, usually sooner. Lahore-based, comfortable across US and EU hours."
+          title={['Let’s build something ', <span className="serif-italic">secure.</span>]}
+          lede="Actively open to cybersecurity, security analysis, AI/ML, and technical development opportunities."
         />
 
-        <Reveal className="mt-12 lg:mt-16">
-          <div className="grid overflow-hidden rounded-[var(--r-lg)] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-[var(--shadow-sm)] md:grid-cols-2">
-            {/* ===== LEFT — status + channels ===== */}
-            <div className="flex flex-col gap-7 border-b border-[color:var(--line)] p-6 sm:p-8 md:border-b-0 md:border-r">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-                <span className="inline-flex items-center gap-2 rounded-[var(--r-pill)] border border-[color:var(--line)] bg-[color:var(--surface-2)] px-3 py-1.5 font-mono text-eyebrow uppercase tracking-[0.16em] text-[color:var(--ink-muted)]">
-                  <span
-                    aria-hidden="true"
-                    className="relative h-1.5 w-1.5 rounded-full bg-[color:var(--ok)] before:absolute before:inset-0 before:animate-pulse-ring before:rounded-full before:bg-[color:var(--ok)]"
-                  />
-                  Open to work
-                </span>
-                <LocalTime />
-              </div>
-
-              <p className="inline-flex items-center gap-2 text-small text-[color:var(--ink-muted)]">
-                <MapPin size={15} strokeWidth={1.5} aria-hidden="true" className="text-[color:var(--ink-faint)]" />
-                Lahore, Pakistan · Remote worldwide
-              </p>
-
-              <div>
-                <p className={labelClass}>Best fit</p>
-                <p className="mt-2.5 max-w-[42ch] text-body text-[color:var(--ink-muted)]">
-                  Teams who care whether the thing still works in month six, where
-                  architecture and the performance budget decide the outcome.
-                </p>
-              </div>
-
-              {/* Quick-copy email */}
-              <button
-                type="button"
-                onClick={copyEmail}
-                data-cursor="target"
-                aria-label={copied ? 'Email address copied' : `Copy email address ${EMAIL}`}
-                className="group flex min-h-[44px] w-full items-center justify-between gap-3 rounded-[var(--r-sm)] border border-[color:var(--line)] bg-[color:var(--bg-elev)] px-3.5 py-2.5 text-left transition-colors duration-200 hover:border-[color:var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--accent)] active:scale-95"
-              >
-                <span className="data flex min-w-0 items-center gap-2.5 text-[color:var(--ink)]">
-                  <Mail size={15} strokeWidth={1.5} aria-hidden="true" className="flex-shrink-0 text-[color:var(--ink-faint)]" />
-                  <span className="truncate">{EMAIL}</span>
-                </span>
-                <span className="inline-flex flex-shrink-0 items-center gap-1.5 text-small font-medium text-[color:var(--ink-muted)] transition-colors duration-200 group-hover:text-[color:var(--accent-strong)]">
-                  {copied ? (
-                    <Check size={15} strokeWidth={1.5} aria-hidden="true" className="text-[color:var(--ok)]" />
-                  ) : (
-                    <Copy size={15} strokeWidth={1.5} aria-hidden="true" />
-                  )}
-                  {copied ? 'Copied' : 'Copy'}
-                </span>
-              </button>
-
-              {/* Channels */}
-              <ul className="mt-auto flex flex-col gap-1 border-t border-[color:var(--line)] pt-5">
-                {channels.map(c => (
-                  <li key={c.label}>
-                    <a
-                      href={c.href}
-                      {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      data-cursor="target"
-                      className="group flex min-h-[44px] items-center gap-3 rounded-[var(--r-sm)] px-1.5 py-1.5 transition-colors duration-200 hover:bg-[color:var(--surface-2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--accent)] active:scale-95"
-                    >
-                      <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-[var(--r-sm)] border border-[color:var(--line)] text-[color:var(--ink-muted)] transition-colors duration-200 group-hover:border-[color:var(--accent)] group-hover:text-[color:var(--accent-strong)]">
-                        {c.icon}
-                      </span>
-                      <span className="flex min-w-0 flex-col">
-                        <span className="text-small font-medium text-[color:var(--ink)]">{c.label}</span>
-                        <span className="link-underline data truncate text-[color:var(--ink-muted)]">{c.handle}</span>
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ===== RIGHT — no-backend form ===== */}
-            <div className="bg-[color:var(--surface)] p-6 sm:p-8">
-              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-name" className={labelClass}>Name</label>
-                  <input
-                    ref={nameRef}
-                    id="contact-name"
-                    name="name"
-                    type="text"
-                    required
-                    autoComplete="name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={e => {
-                      const value = e.target.value
-                      setFormData(f => ({ ...f, name: value }))
-                      if (errors.name) setErrors(prev => ({ ...prev, name: undefined }))
-                    }}
-                    aria-invalid={errors.name ? true : undefined}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={fieldClass}
-                  />
-                  {errors.name && (
-                    <p id="name-error" className="mt-1.5 text-small text-[color:var(--err)]">
-                      {errors.name}
-                    </p>
-                  )}
+        <div className="mt-12 grid gap-10 md:grid-cols-12 md:gap-8">
+          {/* Status & info */}
+          <div className="md:col-span-5">
+            <Reveal>
+              <div className="rounded-[var(--r-md)] border border-[color:var(--line)] bg-[color:var(--bg-elev)] p-6">
+                <div className="flex items-center gap-3">
+                  <LocalTime />
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-email" className={labelClass}>Email</label>
-                  <input
-                    ref={emailRef}
-                    id="contact-email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    placeholder="you@company.com"
-                    value={formData.email}
-                    onChange={e => {
-                      const value = e.target.value
-                      setFormData(f => ({ ...f, email: value }))
-                      if (errors.email) setErrors(prev => ({ ...prev, email: undefined }))
-                    }}
-                    aria-invalid={errors.email ? true : undefined}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
-                    className={fieldClass}
-                  />
-                  {errors.email && (
-                    <p id="email-error" className="mt-1.5 text-small text-[color:var(--err)]">
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-message" className={labelClass}>Message</label>
-                  <textarea
-                    ref={messageRef}
-                    id="contact-message"
-                    name="message"
-                    required
-                    rows={5}
-                    placeholder="What are you building, and where are you stuck?"
-                    value={formData.message}
-                    onChange={e => {
-                      const value = e.target.value
-                      setFormData(f => ({ ...f, message: value }))
-                      if (errors.message) setErrors(prev => ({ ...prev, message: undefined }))
-                    }}
-                    aria-invalid={errors.message ? true : undefined}
-                    aria-describedby={errors.message ? 'message-error' : undefined}
-                    className={`${fieldClass} resize-y`}
-                  />
-                  {errors.message && (
-                    <p id="message-error" className="mt-1.5 text-small text-[color:var(--err)]">
-                      {errors.message}
-                    </p>
-                  )}
-                </div>
-
-                <button type="submit" data-cursor="target" className="btn-primary group w-full justify-center">
-                  <Send size={16} strokeWidth={1.5} aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5" />
-                  Open email draft
-                </button>
-
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                  <p aria-live="polite" className="text-small font-medium text-[color:var(--ok)]">
-                    {opened ? 'Draft opened.' : ''}
+                <div className="mt-6 space-y-4">
+                  <h3 className="font-display text-h3 font-semibold text-[color:var(--ink)]">
+                    Yadlapalli Lalith Nivas
+                  </h3>
+                  <p className="text-body text-[color:var(--ink-muted)]">
+                    M.Tech Cybersecurity student with hands-on expertise in threat detection, vulnerability analysis, and building machine learning defense tools.
                   </p>
-                  <p className={labelClass}>No backend · No tracking</p>
+                </div>
+
+                <div className="mt-6 border-t border-[color:var(--line)] pt-6">
+                  <h4 className={labelClass}>Direct channels</h4>
+                  <ul className="mt-3 space-y-3">
+                    {channels.map(c => (
+                      <li key={c.label}>
+                        <a
+                          href={c.href}
+                          target={c.external ? '_blank' : undefined}
+                          rel={c.external ? 'noopener noreferrer' : undefined}
+                          className="flex items-center justify-between rounded-[var(--r-sm)] p-2 text-body transition-colors duration-200 hover:bg-[color:var(--surface)] hover:text-[color:var(--accent)]"
+                        >
+                          <span className="flex items-center gap-2.5">
+                            {c.icon}
+                            <span className="font-medium text-[color:var(--ink)]">{c.label}</span>
+                          </span>
+                          <span className="font-mono text-eyebrow text-[color:var(--ink-faint)]">
+                            {c.handle}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    type="button"
+                    onClick={copyEmail}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-[var(--r-sm)] border border-[color:var(--line)] py-2 text-body-sm text-[color:var(--ink-muted)] transition-colors duration-200 hover:border-[color:var(--accent)] hover:text-[color:var(--ink)]"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={14} className="text-emerald-500" />
+                        <span>Email address copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={14} />
+                        <span>Copy email address</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Form */}
+          <div className="md:col-span-7">
+            <Reveal delay={0.08}>
+              <form
+                onSubmit={handleSubmit}
+                noValidate
+                className="rounded-[var(--r-md)] border border-[color:var(--line)] bg-[color:var(--bg-elev)] p-6 sm:p-8"
+              >
+                <h3 className="font-display text-h3 font-semibold text-[color:var(--ink)]">
+                  Send a direct message
+                </h3>
+                <p className="mt-1 text-body-sm text-[color:var(--ink-muted)]">
+                  Draft an email directly to <span className="font-mono text-[color:var(--ink)]">{EMAIL}</span>.
+                </p>
+
+                <div className="mt-6 space-y-4">
+                  <div>
+                    <label htmlFor="contact-name" className={labelClass}>
+                      Your Name
+                    </label>
+                    <input
+                      ref={nameRef}
+                      id="contact-name"
+                      type="text"
+                      value={formData.name}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Jane Doe"
+                      className={`${fieldClass} mt-1.5`}
+                    />
+                    {errors.name && <p className="mt-1 text-[0.8rem] text-rose-500">{errors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-email" className={labelClass}>
+                      Your Email
+                    </label>
+                    <input
+                      ref={emailRef}
+                      id="contact-email"
+                      type="email"
+                      value={formData.email}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="jane@example.com"
+                      className={`${fieldClass} mt-1.5`}
+                    />
+                    {errors.email && <p className="mt-1 text-[0.8rem] text-rose-500">{errors.email}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-message" className={labelClass}>
+                      Message / Project Details
+                    </label>
+                    <textarea
+                      ref={messageRef}
+                      id="contact-message"
+                      rows={5}
+                      value={formData.message}
+                      onChange={e => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Hi Lalith, I’d like to discuss a role or collaboration on..."
+                      className={`${fieldClass} mt-1.5 resize-none`}
+                    />
+                    {errors.message && <p className="mt-1 text-[0.8rem] text-rose-500">{errors.message}</p>}
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+                  <button type="submit" className="btn-primary group">
+                    <span>Draft Email</span>
+                    <Send size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </button>
+
+                  {opened && (
+                    <span className="font-mono text-[0.8rem] text-emerald-500">
+                      Email client opened!
+                    </span>
+                  )}
                 </div>
               </form>
-            </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </Container>
     </Section>
   )

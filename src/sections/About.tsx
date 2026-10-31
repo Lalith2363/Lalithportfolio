@@ -3,19 +3,12 @@ import { Container, Section } from '../components/ui'
 import { KineticText, Reveal } from '../components/Kinetic'
 import { scrollToId } from '../lib/smoothScroll'
 
-/* -------------------------------------------------------------------------- *
- *  ABOUT — the thesis. Single centered measure, no card, no columns. The      *
- *  display thesis is the visual centerpiece (high-contrast --ink); three      *
- *  Instrument-serif italic words carry the emphasis (no gradient text). A     *
- *  calm supporting paragraph and one link-underline CTA sit beneath it.       *
- * -------------------------------------------------------------------------- */
-
 export default function About() {
   return (
     <Section id="about" aria-labelledby="about-thesis">
       <Container size="narrow" className="text-center">
         <Reveal>
-          <span className="section-index text-[color:var(--accent-strong)]">The thesis</span>
+          <span className="section-index text-[color:var(--accent-strong)]">The mission</span>
         </Reveal>
 
         <KineticText
@@ -24,12 +17,12 @@ export default function About() {
           className="thesis mt-6 text-display text-[color:var(--ink)]"
         >
           {[
-            'I build the whole stack, not one slice of it. The ',
-            <span key="framework" className="serif-italic text-[color:var(--ink)]">framework</span>,
-            ' underneath, the ',
-            <span key="model" className="serif-italic text-[color:var(--ink)]">model</span>,
-            ' inside, the design system around it, and the app on top. Everything here is solo and open-source: my idea, my design, my code. The part I care about most is the part most demos skip, whether it still works in ',
-            <span key="month-six" className="serif-italic text-[color:var(--ink)]">month six</span>,
+            'Securing systems with ',
+            <span key="data" className="serif-italic text-[color:var(--ink)]">intelligent</span>,
+            ' defense. Merging the tactical edge of ',
+            <span key="sec" className="serif-italic text-[color:var(--ink)]">cybersecurity</span>,
+            ' with the pattern-recognition power of deep learning to detect what traditional firewalls ',
+            <span key="miss" className="serif-italic text-[color:var(--ink)]">overlook</span>,
             '.',
           ]}
         </KineticText>
@@ -39,9 +32,10 @@ export default function About() {
           delay={0.1}
           className="mx-auto mt-8 max-w-[60ch] text-lede text-[color:var(--ink-muted)]"
         >
-          Senior full-stack product engineer in Lahore, Pakistan. I work in TypeScript end to end:
-          React and Next.js on the web, React Native on mobile, Node and Python underneath, with an
-          AI workflow of custom-trained Claude agents that earns its seat.
+          M.Tech Cybersecurity researcher and engineer based in India. Experienced across threat detection,
+          vulnerability assessment, and AI-driven security tooling. Comfortable operating in Kali Linux,
+          building Python automated pipelines, and training machine learning models to solve high-stakes
+          enterprise security challenges.
         </Reveal>
 
         <Reveal delay={0.16} className="mt-9">

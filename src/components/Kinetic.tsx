@@ -1,5 +1,5 @@
 import { Children, type ReactNode, isValidElement } from 'react'
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 /* -------------------------------------------------------------------------- *
  *  KINETIC PRIMITIVES                                                          *
@@ -48,11 +48,11 @@ export function KineticText({
     return <Static className={className} id={id}>{children}</Static>
   }
 
-  const container: Variants = {
+  const container = {
     hidden: {},
     show: { transition: { staggerChildren: stagger, delayChildren: delay } },
   }
-  const word: Variants = {
+  const word = {
     hidden: { y: '115%' },
     show: { y: 0, transition: { duration: 0.7, ease: EASE } },
   }
