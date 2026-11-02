@@ -24,7 +24,7 @@ function BigMarqueeBase({ items, speed = 40, reverse = false, className = '' }: 
       >
         {doubled.map((item, i) => (
           <span key={i} className="flex flex-shrink-0 items-center gap-8 sm:gap-12 min-[1920px]:gap-16">
-            <span className="font-display text-display font-bold leading-none text-outline">{item}</span>
+            <span className="font-display text-display font-medium leading-none text-outline">{item}</span>
             <span aria-hidden="true" className="font-display text-display leading-none text-[color:var(--accent)]">/</span>
           </span>
         ))}

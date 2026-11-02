@@ -3,10 +3,7 @@ import { useTheme } from './hooks/useTheme'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 import Navbar from './components/NavBar'
 import ScrollProgress from './components/ScrollProgress'
-import MagneticCursor from './components/MagneticCursor'
-import BigMarquee from './components/BigMarquee'
 import Hero from './sections/Hero'
-import About from './sections/About'
 import Work from './sections/Work'
 import Stack from './sections/Stack'
 import Process from './sections/Process'
@@ -14,47 +11,24 @@ import Experience from './sections/Experience'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 
-/* The ⌘K palette is lazy-loaded — only enters the bundle when invoked. */
 const CommandPalette = lazy(() => import('./components/CommandPalette'))
 
 export default function App() {
   const { theme, toggle, setOrigin } = useTheme()
   const [paletteOpen, setPaletteOpen] = useState(false)
 
-  /* Inertial smooth scroll (Lenis). Disabled under reduced-motion in the hook. */
   useSmoothScroll()
 
-  /* Global ⌘K / Ctrl+K, plus "/" when not in a field. */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const meta = e.metaKey || e.ctrlKey
       if (meta && e.key.toLowerCase() === 'k') {
         e.preventDefault()
         setPaletteOpen(o => !o)
-        return
-      }
-      if (e.key === '/' && !paletteOpen) {
-        const t = e.target as HTMLElement | null
-        const isField = t?.tagName === 'INPUT' || t?.tagName === 'TEXTAREA' || (t?.isContentEditable ?? false)
-        if (!isField) { e.preventDefault(); setPaletteOpen(true) }
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [paletteOpen])
-
-  useEffect(() => {
-    const w = window as Window & {
-      requestIdleCallback?: (cb: () => void) => number
-      cancelIdleCallback?: (id: number) => void
-    }
-    const prefetch = () => { void import('./components/CommandPalette') }
-    if (w.requestIdleCallback) {
-      const id = w.requestIdleCallback(prefetch)
-      return () => w.cancelIdleCallback?.(id)
-    }
-    const id = window.setTimeout(prefetch, 1500)
-    return () => window.clearTimeout(id)
   }, [])
 
   const handleThemeToggle = useCallback(
@@ -68,38 +42,16 @@ export default function App() {
   return (
     <>
       <a href="#main" className="skip-link">Skip to content</a>
-      <MagneticCursor />
       <ScrollProgress />
       <Navbar theme={theme} onToggleTheme={handleThemeToggle} onOpenPalette={() => setPaletteOpen(true)} />
 
       <main id="main">
         <Hero />
-
-        <div className="cv-auto"><About /></div>
-
         <Work />
-
-        <div className="cv-auto"><Stack /></div>
-
-        {/* The single capabilities marquee */}
-        <div className="border-y border-[color:var(--line)]">
-          <BigMarquee
-            items={[
-              'Threat Detection',
-              'Deep Learning',
-              'Penetration Testing',
-              'Network Security',
-              'Vulnerability Analysis',
-              'Computer Vision',
-              'Kali Linux',
-            ]}
-            speed={40}
-          />
-        </div>
-
-        <div className="cv-auto"><Process /></div>
-        <div className="cv-auto"><Experience /></div>
-        <div className="cv-auto"><Contact /></div>
+        <Stack />
+        <Process />
+        <Experience />
+        <Contact />
       </main>
 
       <Footer />

@@ -1,62 +1,53 @@
+import { Container } from '../components/ui'
 import { skills } from '../data/resume'
-import { Container, Section, SectionHeader } from '../components/ui'
-import { Reveal } from '../components/Kinetic'
 
 const layers: { category: string; label: string }[] = [
   { category: 'Security', label: 'Security & Penetration Testing' },
   { category: 'AI', label: 'Machine Learning & Deep Learning' },
   { category: 'Networking', label: 'Networking & Systems' },
   { category: 'Core', label: 'Core Languages' },
-  { category: 'Web', label: 'Web & Development' },
+  { category: 'Web', label: 'Web & Tools' },
 ]
 
 export default function Stack() {
   return (
-    <Section id="stack" aria-labelledby="stack-heading">
+    <section id="stack" aria-label="Skills & Stack" className="py-16 md:py-20 border-b border-[color:var(--line)]">
       <Container>
-        <SectionHeader
-          index="02"
-          label="STACK"
-          title={['Tools & ', <span key="tech" className="serif-italic">technologies.</span>]}
-          lede="Hands-on security tools, machine learning frameworks, and core engineering languages applied across research and industry work."
-          id="stack-heading"
-        />
+        <span className="font-mono text-xs uppercase tracking-widest text-[color:var(--accent)]">
+          02 / Technical Skills
+        </span>
+        <h2 className="mt-2 text-2xl font-medium tracking-tight text-[color:var(--ink)] sm:text-3xl">
+          Stack &amp; Capabilities
+        </h2>
+        <p className="mt-2 text-sm text-[color:var(--ink-muted)] max-w-xl">
+          Core toolsets and frameworks used across threat detection, vulnerability analysis, and machine learning research.
+        </p>
 
-        <div className="mt-12 sm:mt-16">
-          {layers.map((layer, i) => {
+        <div className="mt-10 divide-y divide-[color:var(--line)]">
+          {layers.map(layer => {
             const items = skills.filter(s => s.category === layer.category)
             if (items.length === 0) return null
 
             return (
-              <Reveal
-                key={layer.category}
-                as="div"
-                delay={i * 0.06}
-                className="group border-t border-[color:var(--line)] py-8 first:border-t-0 sm:py-10"
-              >
-                <div className="grid gap-6 md:grid-cols-[260px_1fr] md:gap-12 lg:grid-cols-[300px_1fr]">
-                  <div>
-                    <h3 className="font-display text-h3 font-semibold text-[color:var(--ink)]">
-                      {layer.label}
-                    </h3>
-                  </div>
-
-                  <ul className="flex flex-wrap gap-2.5 sm:gap-3">
-                    {items.map(item => (
-                      <li
-                        key={item.name}
-                        className="chip rounded-full border border-[color:var(--line)] bg-[color:var(--bg-elev)] px-4 py-2 font-mono text-[0.82rem] text-[color:var(--ink-muted)] transition-all duration-200 hover:border-[color:var(--accent)] hover:text-[color:var(--ink)] hover:shadow-sm"
-                      >
-                        {item.name}
-                      </li>
-                    ))}
-                  </ul>
+              <div key={layer.category} className="py-6 first:pt-0 last:pb-0 grid gap-4 sm:grid-cols-[220px_1fr]">
+                <h3 className="text-sm font-medium text-[color:var(--ink)]">
+                  {layer.label}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {items.map(s => (
+                    <span
+                      key={s.name}
+                      className="rounded border border-[color:var(--line)] bg-[color:var(--bg-elev)] px-2.5 py-1 text-xs font-mono text-[color:var(--ink-muted)] hover:border-[color:var(--accent)] hover:text-[color:var(--ink)] transition-colors"
+                    >
+                      {s.name}
+                    </span>
+                  ))}
                 </div>
-              </Reveal>
+              </div>
             )
           })}
         </div>
       </Container>
-    </Section>
+    </section>
   )
 }
